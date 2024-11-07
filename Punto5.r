@@ -1,15 +1,13 @@
 library(markovchain)
 
 # tasas y probabilidades
-tasa_llegadas <- 11.23308122
-tasa_etiquetado <- 2.647508995
-tasa_validacion <- 4.082838743
-p_exito_validacion <- 0.693069307
-p_error_validacion <- 0.306930693
-tasa_calidad <- 10.97860996
-p_exito_calidad <- 0.811881188
-p_error_calidad <- 0.188118812
-tasa_empaquetado <- 0.361074392
+tasa_llegadas <- 10.23
+tasa_etiquetado <- 2.83
+tasa_validacion <- 3.83
+p_error_validacion <- 0.307
+tasa_calidad <- 11.03
+p_error_calidad <- 0.188
+tasa_empaquetado <- 0.32
 
 
 # Sx etiquetado
@@ -73,7 +71,7 @@ for (fila in estados){
     
     #Procesamiento zona recubrimiento (zona 2)
     if(m == i & n == j - 1 & o == k + 1 & p == l & j > 0 & k < 3){
-      matrizQ[fila,columna] = min(j,3)*tasa_validacion*(1-p_exito_validacion)
+      matrizQ[fila,columna] = min(j,3)*tasa_validacion*(1-p_error_validacion)
     }
     
     #Procesamiento prensa presión (zona 1)
@@ -109,6 +107,8 @@ for(fila in estados){
 
 # Calculate row sums of the generator matrix
 row_sums <- rowSums(matrizQ)
+row_sums
 
-
+cadenaContinua <- new("ctmc", states = estados,
+                      byrow = TRUE, generator = matrizQ)
 
