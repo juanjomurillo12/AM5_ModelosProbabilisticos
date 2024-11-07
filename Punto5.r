@@ -73,7 +73,7 @@ for (fila in estados){
     
     #Procesamiento zona recubrimiento (zona 2)
     if(m == i & n == j - 1 & o == k + 1 & p == l & j > 0 & k < 3){
-      matrizQ[fila,columna] = tasa_validacion*(1-p_exito_validacion)
+      matrizQ[fila,columna] = min(j,3)*tasa_validacion*(1-p_exito_validacion)
     }
     
     #Procesamiento prensa presión (zona 1)
@@ -86,7 +86,7 @@ for (fila in estados){
     }
     
     
-    if (m == i & n == j & o == k & p == max(l - 12, 0)) {
+    if (m == i & n == j & o == k & p == l-min(l,12)) {
       matrizQ[fila, columna] = tasa_empaquetado
     }
     
