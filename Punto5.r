@@ -121,7 +121,7 @@ for (idx in seq_along(estados)) {
 }
 
 # Imprimir el valor esperado a largo plazo
-print(round(valor_esperado_ordenes,2))
+print(valor_esperado_ordenes)
 
 
 # Punto 7
