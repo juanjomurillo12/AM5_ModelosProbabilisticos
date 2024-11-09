@@ -174,3 +174,17 @@ W_q <- L_q / lambda
 # Imprimir resultados
 print(paste("L_q (cantidad esperada de órdenes en cola):", round(L_q, 2), "pedidos"))
 print(paste("W_q (tiempo esperado en cola):", round(W_q, 2), "minutos"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
