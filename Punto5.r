@@ -154,3 +154,23 @@ print(paste("Tasa efectiva de empaquetado: ", round(t_e_empaquetado, 2)))
 calculo<- (t_e_etiquetado/(4*tasa_etiquetado))
 calculo2<- (t_e_validacion/(3*tasa_validacion))
 calculo3<- (t_e_calidad/(tasa_calidad))
+
+print(paste("Rho de etiquetado: ", round(calculo, 2)))
+print(paste("Rho de validación: ", round(calculo2, 2)))
+print(paste("Rho de calidad: ", round(calculo3, 2)))
+
+# Punto 10 -----------------------
+
+# Parámetros
+rho <- calculo3
+lambda <- t_e_calidad
+
+# Cálculo de L_q
+L_q <- (rho^2) / (1 - rho)
+
+# Cálculo de W_q
+W_q <- L_q / lambda
+
+# Imprimir resultados
+print(paste("L_q (cantidad esperada de órdenes en cola):", round(L_q, 2), "pedidos"))
+print(paste("W_q (tiempo esperado en cola):", round(W_q, 2), "minutos"))
