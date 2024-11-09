@@ -96,4 +96,51 @@ print(row_sums)  # Esto debería mostrar un vector de ceros (o valores muy cerca
 cadenaContinua <- new("ctmc", states = estados, byrow = TRUE, generator = matrizQ)
 
 
+# Punto 6
+
+probabilidades_lp <- steadyStates(cadenaContinua)
+
+# Inicializar el valor esperado
+valor_esperado_ordenes <- 0
+
+# Calcular el valor esperado
+for (idx in seq_along(estados)) {
+  valor <- estados[idx]
+  
+  # Extraer i, j, k, l
+  i <- as.numeric(strsplit(valor, ",")[[1]][1])
+  j <- as.numeric(strsplit(valor, ",")[[1]][2])
+  k <- as.numeric(strsplit(valor, ",")[[1]][3])
+  l <- as.numeric(strsplit(valor, ",")[[1]][4])
+  
+  # Calcular i + j + k + l
+  suma_componentes <- i + j + k + l
+  
+  # Multiplicar por la probabilidad a largo plazo correspondiente y acumular
+  valor_esperado_ordenes <- valor_esperado_ordenes + (suma_componentes * probabilidades_lp[idx])
+}
+
+# Imprimir el valor esperado a largo plazo
+print(round(valor_esperado_ordenes,2))
+
+
+# Punto 7
+
+# Definir los estados vacío y lleno
+estado_vacio <- which(estados == "0,0,0,0")
+estado_lleno <- which(estados == "4,3,3,15")
+
+
+# Crear una copia de la matriz generadora y remover la fila y columna del estado final
+matrizQrecortada <- matrizQ[-estado_lleno, -estado_lleno]
+
+# Calcular la inversa de la matriz recortada
+inversaQ <- solve(-matrizQrecortada)
+
+# Calcular el tiempo esperado de primera pasada usando la suma de la primera fila de la matriz inversa
+tiempoPrimeraPasada <- round(sum(inversaQ[estado_vacio, ]),2)
+
+# Imprimir el resultado
+cat("El tiempo esperado para que el sistema pase de vacío a lleno es de:", tiempoPrimeraPasada, "\n")
+
 
