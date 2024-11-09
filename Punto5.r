@@ -1,13 +1,13 @@
 library(markovchain)
 
 # Parámetros
-tasa_llegadas <- 10.23
-tasa_etiquetado <- 2.83
-tasa_validacion <- 3.83
-p_error_validacion <- 0.307
-tasa_calidad <- 11.03
-p_error_calidad <- 0.188
-tasa_empaquetado <- 0.32
+tasa_llegadas <- 10.23506803
+tasa_etiquetado <- 2.830310632
+tasa_validacion <- 3.837818081
+p_error_validacion <- 0.306930693
+tasa_calidad <- 11.03161638
+p_error_calidad <- 0.188118812
+tasa_empaquetado <- 0.324430137
 
 # Estados posibles para cada etapa
 estados_etiquetado <- c(0:4)
@@ -130,17 +130,14 @@ print(valor_esperado_ordenes)
 estado_vacio <- which(estados == "0,0,0,0")
 estado_lleno <- which(estados == "4,3,3,15")
 
+# Calcular el tiempo esperado de primera pasada
 
-# Crear una copia de la matriz generadora y remover la fila y columna del estado final
-matrizQrecortada <- matrizQ[-estado_lleno, -estado_lleno]
-
-# Calcular la inversa de la matriz recortada
-inversaQ <- solve(-matrizQrecortada)
-
-# Calcular el tiempo esperado de primera pasada usando la suma de la primera fila de la matriz inversa
-tiempoPrimeraPasada <- round(sum(inversaQ[estado_vacio, ]),2)
+tiempoPrimeraPasada <- ExpectedTime(cadenaContinua,estado_vacio,estado_lleno)
 
 # Imprimir el resultado
 cat("El tiempo esperado para que el sistema pase de vacío a lleno es de:", tiempoPrimeraPasada, "\n")
+
+# Punto 8
+
 
 
