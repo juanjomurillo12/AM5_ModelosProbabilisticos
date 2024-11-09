@@ -1,5 +1,5 @@
 library(markovchain)
-
+# Punto 5 ----------------------
 # Parámetros
 tasa_llegadas <- 10.23506803
 tasa_etiquetado <- 2.830310632
@@ -96,7 +96,7 @@ print(row_sums)  # Esto debería mostrar un vector de ceros (o valores muy cerca
 cadenaContinua <- new("ctmc", states = estados, byrow = TRUE, generator = matrizQ)
 
 
-# Punto 6
+# Punto 6 ----------------------
 
 probabilidades_lp <- steadyStates(cadenaContinua)
 
@@ -124,7 +124,7 @@ for (idx in seq_along(estados)) {
 print(valor_esperado_ordenes)
 
 
-# Punto 7
+# Punto 7 ----------------------
 
 # Definir los estados vacío y lleno
 estado_vacio <- which(estados == "0,0,0,0")
@@ -137,7 +137,20 @@ tiempoPrimeraPasada <- ExpectedTime(cadenaContinua,estado_vacio,estado_lleno)
 # Imprimir el resultado
 cat("El tiempo esperado para que el sistema pase de vacío a lleno es de:", tiempoPrimeraPasada, "\n")
 
-# Punto 8
+# Punto 8 ----------------------
+
+t_e_etiquetado <- tasa_llegadas
+t_e_validacion <- t_e_etiquetado/(1-p_error_validacion)
+t_e_calidad <- (1-p_error_validacion)*t_e_validacion
+t_e_empaquetado <- (1-p_error_calidad)*t_e_calidad
+
+print(paste("Tasa efectiva de etiquetado: ", round(t_e_etiquetado, 2)))
+print(paste("Tasa efectiva de validación: ", round(t_e_validacion, 2)))
+print(paste("Tasa efectiva de calidad: ", round(t_e_calidad, 2)))
+print(paste("Tasa efectiva de empaquetado: ", round(t_e_empaquetado, 2)))
 
 
-
+# Punto 9 -----------------------
+calculo<- (t_e_etiquetado/(4*tasa_etiquetado))
+calculo2<- (t_e_validacion/(3*tasa_validacion))
+calculo3<- (t_e_calidad/(tasa_calidad))
